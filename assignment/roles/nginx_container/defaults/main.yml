@@ -1,0 +1,5 @@
+---
+nginx_container_name: nginx-docker-assignment
+nginx_image: nginx:latest
+# host_port: 3000
+# container_port: 5000

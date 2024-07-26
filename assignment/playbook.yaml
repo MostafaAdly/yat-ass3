@@ -1,0 +1,7 @@
+---
+- name: Prepare VM for Docker that is using an nginx image for serving static files
+  hosts: all
+  become: yes
+  roles:
+    - docker_setup
+    - nginx_container

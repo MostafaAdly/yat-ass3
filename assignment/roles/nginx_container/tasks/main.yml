@@ -1,0 +1,28 @@
+---
+- name: Install required packages
+  apt:
+    name:
+      - python3-docker
+      - python3-pip
+    state: present
+    update_cache: yes
+
+- name: Pull nginx image from docker-hub
+  community.docker.docker_image:
+    name: "{{ nginx_image }}"
+    tag: latest
+    source: pull
+
+- name: Stop image if running
+  community.docker.docker_container:
+        name: "{{ nginx_container_name }}"
+        state: stopped
+
+- name: Run nginx image
+  community.docker.docker_container:
+    name: "{{ nginx_container_name }}"
+    image: "{{ nginx_image }}"
+    state: started
+    container_default_behavior: no_defaults
+    ports:
+      - "5000:80"
